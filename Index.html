@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>Google Maps JavaScript API サンプル JSON形式のファイルの取得</title>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&language=ja"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.2.min.js"></script>
+    <script type="text/javascript" src="./Scripts/aedmap.js"></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            //JSONファイル読み込み開始
+            $.ajax({
+                type: "get",
+                dataType: "json",
+                url: "https://aed.azure-mobile.net/api/aedinfo/千葉県/",
+                success: function (json) {
+                    var data = jsonRequest(json);
+                    initialize(data);
+                },
+                error: function (xhr, text, thrown) {
+                    $("#map_canvas").text("error : " + text);
+                }
+            });
+        };
+        </script>
+  </head>
+  <body>
+    <p>Google Maps v3 APIを使ったサンプル。<br />JSON形式のファイルからデータを取得しマーカーを表示</p>
+    <div id="map_canvas" style="width:500px; height:300px"></div>
+  </body>
+</html>
